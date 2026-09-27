@@ -1,32 +1,50 @@
-const wallet = {
-  balance: 0,
-  operations: [],
-  increase: function(sum, reason) {
-    this.balance += sum;
-    this.operations.push({
-        reason: reason,
-        sum: sum
-    });
-    return true;
+/* Сделать объект склад с методами добавления на склад, 
+поиска по складу товара и расчет веса */
+
+const warehouse = {
+  goods: [],
+  findGoodById: function (id) {
+    return existedGood = this.goods.find(g => g.id == id);
   },
-  decrease: function(sum, reason) {
-    if (this.balance < sum) {
-        console.log('Недостаточно баланса!');
-        return false;
+  addGood: function (good) {
+    const existedGood = this.findGoodById(good.id);
+    if (existedGood) {
+      console.log('Этот товар уже есть на складе!');
+      return;
     }
-    this.balance -= sum;
-    this.operations.push({
-        reason: reason,
-        sum: -sum
-    });
-    return true;
+    this.goods.push(good);
   },
-  getOperationsLength: function () {
-    return this.operations.length;
-  }
+  getWeightKg: function () {
+    return this.goods.reduce((acc, el) => {
+        acc += el.weight?.kg ? el.weight.kg : 0;
+    }, 0)
+  },
 };
 
-console.log(wallet.increase(500, 'Зарплата'))
-console.log(wallet.getOperationsLength())
-console.log(wallet.decrease(250, 'Кредит'))
-console.log(wallet.operations)
+/* Товары */
+const car = {
+  id: 1,
+  weight: {
+  kg: 1000
+  },
+  brand: 'Ford'
+}
+
+const chair = {
+  id: 2,
+  weight: {
+  kg: 2
+  }
+}
+
+const paper = {
+  id: 3,
+  color: 'red'
+}
+
+warehouse.addGood(car);
+warehouse.addGood(car);
+warehouse.addGood(chair);
+warehouse.addGood(paper);
+console.log(warehouse.goods);
+const findedItem
