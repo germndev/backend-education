@@ -24,11 +24,22 @@ const ToDoList = {
         });
     },
     deleteTask: function (id) {
-        this.tasks = this.tasks.filter(task => task.id !== id);
+        if (this.tasks.find(el => el.id === id)) {
+            this.tasks = this.tasks.filter(task => task.id !== id);
+        } else {
+            console.log("deleteTask: Нет задачи с таким Id.")
+        }
+        
     },
-    updateTask: function (i, titleNew) {
-        const task = this.tasks.find(el => el.id === i);
-        task.title = titleNew;
+    updateTask: function (id, { title, priority }) {
+        const task = this.tasks.find(el => el.id === id);
+        if (task) {
+            title !== undefined ?  task.title = title : null;
+            priority !== undefined ?  task.priority = priority : null;
+        } else {
+            console.log("updateTask: Нет задачи с таким Id.")
+        }
+        
     },
     sortTasks: function () {
         this.tasks.sort((a, b) => b.priority - a.priority);
@@ -38,8 +49,8 @@ const ToDoList = {
 ToDoList.addTask('Попить', 2);
 ToDoList.addTask('Поспать', 1);
 ToDoList.addTask('Поесть', 3);
-ToDoList.deleteTask(3);
-ToDoList.updateTask(2, 'Погулять');
+ToDoList.deleteTask(1);
+ToDoList.updateTask(3, { priority: 2 });
 ToDoList.sortTasks();
 console.log(ToDoList.tasks);
 
