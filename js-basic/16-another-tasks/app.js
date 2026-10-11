@@ -11,11 +11,10 @@ const ToDoList = {
         priority: 5,
     }],
     nextId: 2,
-    addTask: function (titleNew, priorityNum) {
+    addTask: function (task) {
         this.tasks.push({
-            title: titleNew,
-            id: this.nextId++,
-            priority: priorityNum
+            ...task,
+            id: this.nextId++
         });
     },
     deleteTask: function (id) {
@@ -26,18 +25,18 @@ const ToDoList = {
         }
         
     },
-    updateTask: function (id, { title, priority }) {
+    updateTask: function (id, updates) {
         const task = this.tasks.find(el => el.id === id);
+
         if (task) {
-            title !== undefined ?  task.title = title : null;
-            priority !== undefined ?  task.priority = priority : null;
+            Object.assign(task, updates);
         } else {
             console.log("updateTask: Нет задачи с таким Id.")
         }
         
     },
-    sortTasks: function () {
-        this.tasks.sort((a, b) => b.priority - a.priority);
+    sortTasks: function (key) {
+        this.tasks.sort((a, b) => b[key] - a[key]);
     }
 };
 
@@ -57,13 +56,25 @@ ToDoList.deleteTask.call(newTask, 1);
 
 // Add task
 newTask.nextId = 2;
-ToDoList.addTask.call(newTask, 'Тест 2', 2);
-ToDoList.addTask.call(newTask, 'Тест 3', 3);
-
-// Sort tasks
-ToDoList.sortTasks.call(newTask);
+ToDoList.addTask.call(newTask, {
+    name: 'Тест 2',
+    description: '123',
+    order: 2
+});
+ToDoList.addTask.call(newTask, {
+    name: 'Тест 3',
+    description: '456',
+    order: 2
+});
 
 // Update tasks
-ToDoList.updateTask.call(newTask, 2, {title: 'Тест 4'});
+ToDoList.updateTask.call(newTask, 2, {
+    name: 'Тест 4',
+    description: '789',
+    order: 1
+});
+
+// Sort tasks
+ToDoList.sortTasks.call(newTask, 'order');
 
 console.log(newTask.tasks);
