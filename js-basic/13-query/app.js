@@ -16,5 +16,3 @@ function queryParams(obj) {
 }
 
 console.log(queryParams(example));
-
-// search=Вася&take=10
