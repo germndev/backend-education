@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +8,16 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <button class="toggle-hint-btn">Показать подсказку</button>
+<div class="hint-box">Это подсказка</div>
+<script>
+  document.querySelector('.toggle-hint-btn').addEventListener('click', () => {
+    document.querySelector('.hint-box').classList.toggle('hint-box_visible');
+  });
+</script>
 </body>
 </html>
+
+
+
+

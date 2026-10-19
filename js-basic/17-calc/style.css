@@ -1,0 +1,24 @@
+.buttons {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.inputs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.inputs span {
+    padding: 5px;
+}
+
+.inputs .result {
+    font-weight: 700;
+}
+
+.inputs input {
+    padding: 5px;
+}
