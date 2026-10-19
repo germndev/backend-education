@@ -1,24 +1,18 @@
 'use strict';
 
-const company = {
-  name: "ООО Агро",
-  employees: [
-    { 
-      name: ["Света", "Жопа"], 
-      getName: function () {
-        return this.name;
-      }
-    }
-  ],
-  ceo: {
-    name: "Вася",
-    getName: function () {
-        return this.name;
-    }
-  },
-  getName: function () {
-    return this.name;
+const account = {
+  transactions: []
+};
+
+const logger = {
+  record(type, amount) {
+    this.transactions.push({ type, amount });
   }
 };
 
-console.log(company.employees.map(employee => employee.getName()));
+// Ваш код здесь
+const recordAccount = logger.record.bind(account, 'deposit');
+
+recordAccount(100);
+
+console.log(account);
